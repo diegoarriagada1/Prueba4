@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 ContentValues CV = new ContentValues();
                 if(nulo.isChecked()==false && boric.isChecked()==false && kast.isChecked()==false) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage("¿Seguro que quiere dejar en blanco el voto?")
+                    builder.setMessage("¿Desea continuar votando en blanco?")
                             .setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     SQLiteDatabase db;
@@ -55,22 +55,22 @@ public class MainActivity extends AppCompatActivity {
                     builder.show();
                 }
                     if (nulo.isChecked() == true) {
-                        CV.put("rb_n", nulo.getText().toString());
-                        db.insert("voto", null, CV);
+                        CV.put("voto_nulo","1");
                         Intent I = new Intent(getApplicationContext(),MainActivity2.class);
                         startActivity(I);
 
                     }
                     if (boric.isChecked()) {
-                        CV.put("rb_gabrielboric", boric.getText().toString());
+                        CV.put("voto_boric","1");
                         Intent I = new Intent(getApplicationContext(),MainActivity2.class);
                         startActivity(I);
                     }
                     if (kast.isChecked()) {
-                        CV.put("rb_joseantoniokast", kast.getText().toString());
+                        CV.put("voto_kast","1");
                         Intent I = new Intent(getApplicationContext(),MainActivity2.class);
                         startActivity(I);
                     }
+                    db.insert("voto",null,CV);
 
 
 
